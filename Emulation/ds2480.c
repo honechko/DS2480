@@ -66,21 +66,21 @@ void serial_flushrx() {
 
 /* ================= 1-wire bus low-level functions ========== */
 
-inline void bus_pull_down() {
+static inline void bus_pull_down() {
 #ifdef WAEK_PULLUP
 	PORT(OWPIN) &= ~BV(OWPIN);
 #endif
 	DDR(OWPIN) |= BV(OWPIN);    // drives output low
 }
 
-inline void bus_release() {
+static inline void bus_release() {
 #ifdef WAEK_PULLUP
 	PORT(OWPIN) |= BV(OWPIN);
 #endif
 	DDR(OWPIN) &= ~BV(OWPIN);
 }
 
-inline uint8_t bus_read() {
+static inline uint8_t bus_read() {
 	return (PIN(OWPIN) & BV(OWPIN)) ? 1 : 0;
 }
 
